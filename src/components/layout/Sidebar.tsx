@@ -27,7 +27,7 @@ interface SidebarProps {
 }
 
 export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
-  const { user, isAuthenticated, logout } = useAuthStore()
+  const { logout } = useAuthStore()
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {

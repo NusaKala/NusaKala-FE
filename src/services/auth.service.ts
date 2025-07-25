@@ -1,5 +1,5 @@
 import apiClient from '@/lib/axios'
-import axios, { AxiosError, AxiosRequestConfig } from 'axios'
+import axios from 'axios'
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'
 

@@ -16,7 +16,6 @@ import {
   ChefHat, 
   BookOpen, 
   MapPin,
-  ExternalLink,
   RefreshCw,
   AlertCircle
 } from 'lucide-react';

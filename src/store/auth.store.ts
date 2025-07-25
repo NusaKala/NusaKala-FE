@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { authService, type User, type RegisterData, type LoginData } from '@/services/auth.service'
+import { authService, type User, type RegisterData } from '@/services/auth.service'
 
 interface AuthState {
   user: User | null
@@ -55,7 +55,7 @@ export const useAuthStore = create<AuthState>()(
         set({ isLoading: true, error: null })
         try {
           const response = await authService.register(data)
-          
+          console.log(response)
           set({ 
             user: null, 
             isAuthenticated: false, 
@@ -79,6 +79,7 @@ export const useAuthStore = create<AuthState>()(
           await authService.logout()
         } catch (error) {
           // Continue with logout even if server call fails
+          console.log(error)
         } finally {
           // Always clear local state and localStorage
           set({ 
@@ -113,6 +114,7 @@ export const useAuthStore = create<AuthState>()(
           }
           set(newState)
         } catch (error) {
+          console.log(error)
           set({ 
             user: null, 
             isAuthenticated: false,

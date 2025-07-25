@@ -8,7 +8,7 @@ import { Province } from '@/services/map.service'
 import { MapPin } from 'lucide-react'
 
 // Fix for default markers
-delete (L.Icon.Default.prototype as Record<string, any>)._getIconUrl
+delete (L.Icon.Default.prototype as { _getIconUrl?: unknown })._getIconUrl
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: '/leaflet/marker-icon-2x.png',
   iconUrl: '/leaflet/marker-icon.png',
@@ -60,10 +60,10 @@ export default function MapContainer({
   selectedProvince, 
   onProvinceClick 
 }: MapContainerProps) {
-  const [geoJsonData, setGeoJsonData] = useState<GeoJSON.FeatureCollection | null>(null)
+  const [geoJsonData] = useState<GeoJSON.FeatureCollection | null>(null)
 
   // Style for GeoJSON layers
-  const geoJsonStyle = (feature: any) => {
+  const geoJsonStyle = (feature: GeoJSON.Feature) => {
     const isSelected = selectedProvince?.id === feature.properties?.id
     return {
       fillColor: isSelected ? '#D4AF37' : '#228B22',
@@ -76,6 +76,7 @@ export default function MapContainer({
   }
 
   // Handle feature click
+  // eslint-disable-next-line no-console
   const onEachFeature = (feature: any, layer: L.Layer) => {
     layer.on({
       click: () => {
